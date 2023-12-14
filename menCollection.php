@@ -12,11 +12,11 @@
         <section class="content-main">
             <div class="content-header">
                 <div>
-                    <h2 class="content-title card-title">Events Collections</h2>
+                    <h2 class="content-title card-title">Men's Collections</h2>
        
                 </div>
                 <div>
-                    <a href="addEvents.php" class="btn btn-primary btn-sm rounded">Create new</a>
+                    <a href="addMen.php" class="btn btn-primary btn-sm rounded">Create new</a>
                 </div>
             </div>
             <div class="card mb-4">
@@ -49,16 +49,16 @@
                                     <div class="col-lg-2 col-sm-2 col-2 col-price"> <span>PKR '.$productModel->price.'</span> </div>
                                     <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
                                         
-                                        <a href="events.php?delete='.$productModel->id.'" class="btn btn-sm font-sm btn-light rounded">
+                                        <a href="menCollection.php?delete='.$productModel->id.'" class="btn btn-sm font-sm btn-light rounded">
                                             <i class="material-icons md-delete_forever"></i> 
                                         </a>
-                                        <a href="editEvents.php?edit='.$productModel->id.'" class="btn btn-sm font-sm btn-light rounded">
-                                        <i class="material-icons md-edit"></i> 
-                                    </a>
+                                        <a href="editMen.php?edit='.$productModel->id.'" class="btn btn-sm font-sm btn-light rounded">
+                                            <i class="material-icons md-edit"></i> 
+                                        </a>
                                     </div>';
                                     }
                                 }
-                                $productModel->eventsdelete();
+                                $productModel->delete();
                             ?>
                            
                             

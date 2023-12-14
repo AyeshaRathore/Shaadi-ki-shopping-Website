@@ -1,158 +1,107 @@
-<?php require ("includes/header.php") ?>
+<?php
+    session_start();
+    if(!isset($_SESSION['adminname'])){
+        header('location: ../login.php');
+    }
 
-<!-- Modal -->
-
-
-<!-- Quick view -->
-<div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body">
+?>
+<?php include("includes/adminHeader.php")?>
+<?php include("includes/adminNavbar.php")?>
+    <main class="main-wrap">
+    <?php include("includes/adminTopbar.php")?>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Dashboard</h2>
+                    
+                </div>
+                <!-- <div>
+                    <a href="#" class="btn btn-light rounded font-md">Export</a>
+                    <a href="#" class="btn btn-light rounded  font-md">Import</a>
+                    <a href="#" class="btn btn-primary btn-sm rounded">Create new</a>
+                </div> -->
+            </div>
+            <!-- <div class="card mb-4"> -->
+                
+                <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="detail-gallery">
-                            <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                            <!-- MAIN SLIDES -->
-                            <div class="product-image-slider">
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-2.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-1.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-3.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-4.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-5.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-6.jpg" alt="product image">
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-7.jpg" alt="product image">
-                                </figure>
+                <div class="col-lg-4">
+                    <div class="card card-body mb-4">
+                        <article class="icontext">
+                            <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
+                            <div class="text">
+                                <h6 class="mb-1 card-title">Revenue</h6>
+                                <span>PKR<?php 
+                                    $result = $ordermodel->countrevenue();
+                                    $revenue = 0;
+                                    if($result->num_rows>0){
+                                        while($rows = $result->fetch_assoc()){
+                                            $revenue += $rows['total_price'];
+                                        }}
+                                        echo $revenue;
+                                    ?></span>
+                                <span class="text-sm">
+                                    Shipping fees are not included
+                                </span>
                             </div>
-                            <!-- THUMBNAILS -->
-                            <div class="slider-nav-thumbnails pl-15 pr-15">
-                                <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
-                            </div>
-                        </div>
-                        <!-- End Gallery -->
-                        <div class="social-icons single-share">
-                            <ul class="text-grey-5 d-inline-block">
-                                <li><strong class="mr-10">Share this:</strong></li>
-                                <li class="social-facebook">
-                                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                </li>
-                                <li class="social-twitter">
-                                    <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                </li>
-                                <li class="social-instagram">
-                                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                </li>
-                                <li class="social-linkedin">
-                                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="detail-info">
-                            <h3 class="title-detail mt-30">Colorful Pattern Shirts HD450</h3>
-                            <div class="product-detail-rating">
-                                <div class="pro-details-brand">
-                                    <span> Brands: <a href="shop-grid-right.html">Bootstrap</a></span>
-                                </div>
-                                <div class="product-rate-cover text-end">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width:90%">
-                                        </div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (25 reviews)</span>
-                                </div>
-                            </div>
-                            <div class="clearfix product-price-cover">
-                                <div class="product-price primary-color float-left">
-                                    <ins><span class="text-brand">$120.00</span></ins>
-                                    <ins><span class="old-price font-md ml-15">$200.00</span></ins>
-                                    <span class="save-price  font-md color3 ml-15">25% Off</span>
-                                </div>
-                            </div>
-                            <div class="bt-1 border-color-1 mt-15 mb-15"></div>
-                            <div class="short-desc mb-30">
-                                <p class="font-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi,!</p>
-                            </div>
-
-                            <div class="attr-detail attr-color mb-15">
-                                <strong class="mr-10">Color</strong>
-                                <ul class="list-filter color-filter">
-                                    <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
-                                    <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                    <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                    <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                    <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                    <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                    <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
-                                </ul>
-                            </div>
-                            <div class="attr-detail attr-size">
-                                <strong class="mr-10">Size</strong>
-                                <ul class="list-filter size-filter font-small">
-                                    <li><a href="#">S</a></li>
-                                    <li class="active"><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                    <li><a href="#">XXL</a></li>
-                                </ul>
-                            </div>
-                            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                            <div class="detail-extralink">
-                                <div class="detail-qty border radius">
-                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                    <span class="qty-val">1</span>
-                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                </div>
-                                <div class="product-extra-link2">
-                                    <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                </div>
-                            </div>
-                            <ul class="product-meta font-xs color-grey mt-50">
-                                <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
-                                <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
-                            </ul>
-                        </div>
-                        <!-- Detail Info -->
+                        </article>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    <div class="card card-body mb-4">
+                        <article class="icontext">
+                            <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
+                            <div class="text">
+                                <h6 class="mb-1 card-title">Orders</h6> <span><?php 
+                                    $result = $ordermodel->countorders();
+                                    if($result->num_rows>0){
+                                        while($rows = $result->fetch_assoc()){
+                                            echo $rows['countorders'];
+                                        }}
+                                    ?></span>
+                                <span class="text-sm">
+                                    All orders
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body mb-4">
+                        <article class="icontext">
+                            <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
+                            <div class="text">
+                                <h6 class="mb-1 card-title">Products</h6> <span>
+                                    <?php 
+                                    $result = $productModel->countproducts();
+                                    if($result->num_rows>0){
+                                        while($rows = $result->fetch_assoc()){
+                                            echo $rows['countproduct'];
+                                        }}
+                                    ?>
+                                </span>
+                                <span class="text-sm">
+                                    In <?php 
+                                    $result = $categorymodel->countcat();
+                                    if($result->num_rows>0){
+                                        while($rows = $result->fetch_assoc()){
+                                            echo $rows['countcat'];
+                                        }}
+                                    ?> Categories
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                
             </div>
-        </div>
-    </div>
-</div>
-
-<?php require ("includes/navbar.php") ?>
-<?php require ("includes/mobHeader.php")?>
- 
-<?php 
-    if(isset($_GET['search'])) {
-        include('search.php');
-    }else{
-        include('main.php');
-    }
+                </div>
+                <!-- card-body end// -->
+            <!-- </div> -->
+            <!-- card end// -->
+            
+        </section>
+        <!-- content-main end// -->
     
-?>
-
-<?php require ("includes/footer.php") ?>
+    </main>
+<?php include("includes/adminFotter.php")?>
